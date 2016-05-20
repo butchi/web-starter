@@ -7,7 +7,7 @@ pleeease = require 'gulp-pleeease'
 browserify = require 'browserify'
 babelify = require 'babelify'
 debowerify = require 'debowerify'
-jade = require 'gulp-jade'
+pug = require 'gulp-pug'
 rename = require 'gulp-rename'
 uglify = require 'gulp-uglify'
 decodecode = require 'gulp-decodecode'
@@ -17,14 +17,14 @@ SRC = './src'
 DEST = '.'
 
 # html
-gulp.task 'jade', () ->
-  return gulp.src("#{SRC}/jade/*.jade")
-    .pipe jade
+gulp.task 'pug', () ->
+  return gulp.src("#{SRC}/pug/*.pug")
+    .pipe pug
       # locals: locals,
       pretty: true,
     .pipe gulp.dest "#{DEST}"
 
-gulp.task 'html', gulp.series('jade')
+gulp.task 'html', gulp.series('pug')
 
 gulp.task 'sass', () ->
   gulp.src "#{SRC}/scss/style.scss"
@@ -87,7 +87,7 @@ gulp.task 'browser-sync' , () ->
 
   gulp.watch(["#{SRC}/scss/**/*.scss"], gulp.series('sass', browserSync.reload));
   gulp.watch(["#{SRC}/js/**/*.js"], gulp.series('browserify', browserSync.reload));
-  gulp.watch(["#{SRC}/jade/**/*.jade"], gulp.series('jade', browserSync.reload));
+  gulp.watch(["#{SRC}/pug/**/*.pug"], gulp.series('pug', browserSync.reload));
 
 gulp.task('serve', gulp.series('browser-sync'));
 
