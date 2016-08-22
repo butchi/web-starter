@@ -17,7 +17,7 @@ import browserSync from 'browser-sync';
 
 // const
 const SRC = './src';
-const DEST = '.';
+const DEST = './docs';
 
 
 // css
