@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-// importy
+// import
 import gulp from 'gulp';
 import source from 'vinyl-source-stream';
 import sass from 'gulp-sass';
@@ -14,6 +14,8 @@ import uglify from 'gulp-uglify';
 import decodecode from 'gulp-decodecode';
 import browserSync from 'browser-sync';
 
+
+// const
 const SRC = './src'
 const DEST = '.'
 
