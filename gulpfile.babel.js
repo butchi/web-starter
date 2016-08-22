@@ -13,33 +13,22 @@ import rename from 'gulp-rename';
 import uglify from 'gulp-uglify';
 import decodecode from 'gulp-decodecode';
 import browserSync from 'browser-sync';
+import readConfig from 'read-config';
+import watch from 'gulp-watch';
 
 
 // const
 const SRC = './src';
+const CONFIG = './src/config';
 const DEST = './docs';
 
 
 // css
 gulp.task('sass', () => {
+  const config = readConfig(`${CONFIG}/pleeease.json`);
   return gulp.src(`${SRC}/scss/style.scss`)
     .pipe(sass())
-    .pipe(pleeease({
-      autoprefixer: {
-        browsers: [
-          "ie >= 10",
-          "ie_mob >= 10",
-          "ff >= 30",
-          "chrome >= 34",
-          "safari >= 7",
-          "opera >= 23",
-          "ios >= 7",
-          "android >= 4.4",
-          "bb >= 10"
-        ]
-      },
-      "minifier": false,
-    }))
+    .pipe(pleeease(config))
     .pipe(gulp.dest(`${DEST}/css`))
   ;
 });
@@ -90,9 +79,10 @@ gulp.task('js', gulp.series(gulp.parallel('browserify', 'copy-bower'), gulp.para
 
 // html
 gulp.task('pug', () => {
+  const locals = readConfig(`${CONFIG}/meta.yml`);
   return gulp.src(`${SRC}/pug/*.pug`)
     .pipe(pug({
-      // locals: locals,
+      locals: locals,
       pretty: true,
     }))
     .pipe(gulp.dest(`${DEST}`))
@@ -109,9 +99,12 @@ gulp.task('browser-sync' , () => {
     },
   });
 
-  gulp.watch(["#{SRC}/scss/**/*.scss"], gulp.series('sass', browserSync.reload));
-  gulp.watch(["#{SRC}/js/**/*.js"], gulp.series('browserify', browserSync.reload));
-  gulp.watch(["#{SRC}/pug/**/*.pug"], gulp.series('pug', browserSync.reload));
+  watch([`${SRC}/scss/**/*.scss`], gulp.series('sass', browserSync.reload));
+  watch([`${SRC}/js/**/*.js`], gulp.series('browserify', browserSync.reload));
+  watch([
+      `${SRC}/pug/**/*.pug`,
+      `${SRC}/config/meta.yml`
+  ], gulp.series('pug', browserSync.reload));
 });
 
 gulp.task('serve', gulp.series('browser-sync'));
