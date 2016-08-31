@@ -21,6 +21,7 @@
   ],
   "devDependencies": {
     "jquery": "~2.2.2",
-    "lodash": "~4.7.0"
+    "lodash": "~4.7.0",
+    "reset-css": "2.0.*"
   }
 }

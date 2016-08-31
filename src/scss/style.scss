@@ -1,3 +1,9 @@
+// reset css
+@import 'bower_components/reset-css/reset.css';
+
+// config
+@import 'variable', 'function', 'mixin', 'keyframes';
+
 * {
   box-sizing: border-box;
 }
@@ -7,9 +13,17 @@ html {
 }
 
 body {
-  font-size: 1.4rem;
+  font-size: $base-font-size;
+  font-family: $sans-serif;
+  line-height: 1.5;
 }
 
 main {
   display: block;
 }
+
+// modules
+@import 'module/wrapper';
+
+// pages
+@import 'page/index';
