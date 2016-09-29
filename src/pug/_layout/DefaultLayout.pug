@@ -59,6 +59,8 @@ html(lang="ja")
       //- wwwやhttps、getパラメータなど、微妙に違うURLでアクセスされても、使われるURLをひとつに絞れる
       link(rel="canonical" href=url)
 
+    script(src= rootPath + "/js/ua-switch.js")
+
     // stylesheet
     block StylesheetBlock
       link(rel="stylesheet", href="css/style.css")
