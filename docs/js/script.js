@@ -1,13 +1,13 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _ns = require('./module/ns');
-
-var _ns2 = _interopRequireDefault(_ns);
-
-var _Router = require('./module/Router');
+var _Router = require('./Router');
 
 var _Router2 = _interopRequireDefault(_Router);
 
@@ -42,9 +42,9 @@ var Main = function () {
   return Main;
 }();
 
-_ns2.default.main = new Main();
+exports.default = Main;
 
-},{"./module/Router":2,"./module/ns":3}],2:[function(require,module,exports){
+},{"./Router":2}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -139,6 +139,27 @@ var Common = function () {
     key: 'initialize',
     value: function initialize() {
       console.log('page common');
+
+      this.setEnvClass();
+    }
+  }, {
+    key: 'setEnvClass',
+    value: function setEnvClass() {
+      var $html = $('html');
+
+      _ns2.default.isSp = false;
+      _ns2.default.isPc = false;
+      _ns2.default.isTab = false;
+
+      if ($html.hasClass('is-sp')) {
+        _ns2.default.isSp = true;
+      }
+      if ($html.hasClass('is-pc')) {
+        _ns2.default.isPc = true;
+      }
+      if ($html.hasClass('is-tab')) {
+        _ns2.default.isTab = true;
+      }
     }
   }]);
 
@@ -185,4 +206,21 @@ var Index = function () {
 
 exports.default = Index;
 
-},{"../module/ns":3}]},{},[1]);
+},{"../module/ns":3}],6:[function(require,module,exports){
+'use strict';
+
+var _ns = require('./module/ns');
+
+var _ns2 = _interopRequireDefault(_ns);
+
+var _Main = require('./module/Main');
+
+var _Main2 = _interopRequireDefault(_Main);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// エントリーポイント。indexからはライブラリとこれしか呼ばない
+
+_ns2.default.main = new _Main2.default();
+
+},{"./module/Main":1,"./module/ns":3}]},{},[6]);

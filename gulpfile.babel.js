@@ -46,29 +46,29 @@ gulp.task('copy-bower', () => {
 });
 
 gulp.task('browserify', () => {
-  return browserify(`${SRC}/js/main.js`)
+  return browserify(`${SRC}/js/script.js`)
     .transform(babelify)
     .transform(debowerify)
     .bundle()
-    .pipe(source('main.js'))
+    .pipe(source('script.js'))
     .pipe(gulp.dest(`${DEST}/js`))
   ;
 });
 
 gulp.task('minify', () => {
-  return gulp.src(`${DEST}/js/main.js`)
+  return gulp.src(`${DEST}/js/script.js`)
     .pipe(uglify({}))
-    .pipe(rename('main.min.js'))
+    .pipe(rename('script.min.js'))
     .pipe(gulp.dest(`${DEST}/js`))
   ;
 });
 
 gulp.task('deco', () => {
-  return gulp.src(`${DEST}/js/main.js`)
+  return gulp.src(`${DEST}/js/script.js`)
     .pipe(decodecode({
       decoArr: ['b', 'u', 't', 'c', 'h', 'i'],
     }))
-    .pipe(rename('main.deco.js'))
+    .pipe(rename('script.deco.js'))
     .pipe(gulp.dest(`${DEST}/js`))
   ;
 });
