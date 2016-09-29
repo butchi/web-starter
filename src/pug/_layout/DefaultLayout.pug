@@ -1,5 +1,6 @@
 block ConfigBlock
-  - pageId = 'page-common'
+  - pageId = 'undefined'
+  - rootPath = '.'
   - title = page_name ? [page_name, site_name].join(' | ') : site_name
 
 doctype html
@@ -65,18 +66,20 @@ html(lang="ja")
     block StylesheetBlock
       link(rel="stylesheet", href="css/style.css")
 
-  body(class= pageId)
+  body(class= 'page-' + pageId)
     //- appId指定を忘れないように
-    include ../_partial/fb-sdk.html
+    //- include ../_partial/fb-sdk.html
 
     .wrapper
       block ContentBlock
-
-    //- トラッキングID指定を忘れないように
-    include ../_partial/ga.html
 
     // javascript
     block JavascriptBlock
       script(src='js/lib/jquery.min.js')
       script(src='js/lib/lodash.min.js')
       script(src="js/main.js")
+
+    //- include ../_partial/gplus-platform.html
+
+    //- トラッキングID指定を忘れないように
+    //- include ../_partial/ga.html
