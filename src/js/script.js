@@ -1,3 +1,5 @@
+// エントリーポイント。indexからはライブラリとこれしか呼ばない
+
 import ns from './module/ns';
 import Router from './module/Router';
 
