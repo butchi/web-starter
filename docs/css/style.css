@@ -51,13 +51,26 @@ table {
   box-sizing: border-box; }
 
 html {
-  font-size: 10px; }
+  font-size: 100px; }
 
 body {
-  font-size: 14px;
-  font-size: 1.4rem;
   font-family: YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Meiryo, "メイリオ", sans-serif;
   line-height: 1.5; }
+  html.is-sp body {
+    font-size: 15px;
+    font-size: 0.15rem; }
+  html.is-pc body {
+    font-size: 15px;
+    font-size: 0.15rem; }
 
 main {
   display: block; }
+
+html.is-sp .wrapper {
+  overflow: hidden; }
+
+html.is-pc .wrapper {
+  width: 100%;
+  min-width: 1200px;
+  min-width: 12rem;
+  overflow: hidden; }
