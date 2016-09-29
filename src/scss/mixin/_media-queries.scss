@@ -3,36 +3,38 @@
 // ==========================================================================
 
 // basic
-@mixin mq ($min: "", $max: "") {
-    @if $max == "" {
-        @media only screen and ($min) {
-            @content;
-        }
-    } @else {
-        @media only screen and ($min) and ($max) {
-            @content;
-        }
+@mixin mq($env) {
+  @if $env == "pc" {
+    @include mq-pc {
+      @content;
     }
+  } @elseif $env == "sp" {
+    @include mq-sp {
+      @content;
+    }
+  } @else {
+    @include mq-all {
+      @content;
+    }
+  }
+}
+
+@mixin mq-all {
+  html & {
+    @content;
+  }
 }
 
 // for Desktop
-@mixin mq-pc ($breakpoint: $breakpoint) {
-    @media not all and (min-width: ($breakpoint + 1px)) {
-        @content;
-    }
+@mixin mq-pc {
+  html.is-pc & {
+    @content;
+  }
 }
 
 // for Smartphone
-@mixin mq-sp ($breakpoint: $breakpoint) {
-    @media only screen and (max-width: $breakpoint) {
-        @content;
-    }
+@mixin mq-sp {
+  html.is-sp & {
+    @content;
+  }
 }
-
-// for Landscape (Smartphone)
-@mixin mq-orientation ($breakpoint: 375px) {
-    @media only screen and (min-width: $breakpoint) {
-        @content;
-    }
-}
-

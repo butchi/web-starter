@@ -2,18 +2,24 @@
 @import 'bower_components/reset-css/reset.css';
 
 // config
-@import 'variable', 'function', 'mixin', 'keyframes';
+@import 'function', 'variable', 'mixin', 'keyframes';
 
 * {
   box-sizing: border-box;
 }
 
 html {
-  font-size: 10px;
+  font-size: #{$px-per-rem}px;
 }
 
 body {
-  font-size: $base-font-size;
+  @include mq-sp {
+    font-size: $base-font-size--sp;
+  }
+  @include mq-pc {
+    font-size: $base-font-size--pc;
+  }
+
   font-family: $sans-serif;
   line-height: 1.5;
 }

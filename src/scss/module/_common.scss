@@ -1,0 +1,56 @@
+.display-none {
+  display: none;
+}
+
+.pc-none {
+  @include mq-pc {
+    display: none;
+  }
+}
+
+.sp-none {
+  @include mq-sp {
+    display: none;
+  }
+}
+
+html {
+  font-size: 10px;
+
+  &.is-sp {
+    font-size: 100vw / $wrapper-width--sp * $px-per-rem;
+  }
+
+  &.is-pc {
+    font-size: #{$px-per-rem}px;
+  }
+
+  &.is-tab {
+    font-size: 100vw / $wrapper-width--tab * $px-per-rem;
+  }
+}
+
+body {
+  @include mq-sp {
+    font-size: $base-font-size--sp;
+    line-height: $line-height--sp;
+  }
+  @include mq-pc {
+    font-size: $base-font-size--pc;
+    line-height: $line-height--pc;
+  }
+  font-family: $sans-serif;
+}
+
+main {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
