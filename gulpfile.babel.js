@@ -24,6 +24,18 @@ const DEST = './docs';
 
 
 // css
+gulp.task('copy-bower-css', () => { 
+  return gulp.src(
+    [
+      'material-design-lite/material.min.css',
+      'material-design-lite/material.min.css.map'
+    ], {
+    cwd: 'bower_components',
+  })
+    .pipe(gulp.dest(`${DEST}/css/lib`))
+  ;
+});
+
 gulp.task('sass', () => {
   const config = readConfig(`${CONFIG}/pleeease.json`);
   return gulp.src(`${SRC}/scss/style.scss`)
@@ -33,12 +45,19 @@ gulp.task('sass', () => {
   ;
 });
 
-gulp.task('css', gulp.series('sass'));
+gulp.task('css', gulp.series(gulp.parallel('sass', 'copy-bower-css')));
 
 
 // js
-gulp.task('copy-bower', () => { 
-  return gulp.src(['jquery/dist/jquery.min.js', 'lodash/dist/lodash.min.js'], {
+gulp.task('copy-bower-js', () => { 
+  return gulp.src(
+    [
+      'jquery/dist/jquery.min.js',
+      'jquery/dist/jquery.min.map',
+      'lodash/dist/lodash.min.js',
+      'material-design-lite/material.min.js',
+      'material-design-lite/material.min.js.map'
+    ], {
     cwd: 'bower_components',
   })
     .pipe(gulp.dest(`${DEST}/js/lib`))
@@ -73,14 +92,14 @@ gulp.task('deco', () => {
   ;
 });
 
-// gulp.task 'js', gulp.parallel('browserify', 'copy-bower')
-gulp.task('js', gulp.series(gulp.parallel('browserify', 'copy-bower'), gulp.parallel('minify', 'deco')));
+// gulp.task 'js', gulp.parallel('browserify', 'copy-bower-js')
+gulp.task('js', gulp.series(gulp.parallel('browserify', 'copy-bower-js'), gulp.parallel('minify', 'deco')));
 
 
 // html
 gulp.task('pug', () => {
   const locals = readConfig(`${CONFIG}/meta.yml`);
-  return gulp.src([`${SRC}/pug/**/*.pug`, `${SRC}/pug/[!_]*.pug`])
+  return gulp.src([`${SRC}/pug/**/[!_]*.pug`, `!${SRC}/pug/_**/*`])
     .pipe(pug({
       locals: locals,
       pretty: true,

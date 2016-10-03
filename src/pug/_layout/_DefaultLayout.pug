@@ -1,6 +1,6 @@
 block ConfigBlock
   - pageId = 'undefined'
-  - rootPath = '.'
+  - rootPath = './'
   - title = page_name ? [page_name, site_name].join(' | ') : site_name
 
 doctype html
@@ -60,11 +60,12 @@ html(lang="ja")
       //- wwwやhttps、getパラメータなど、微妙に違うURLでアクセスされても、使われるURLをひとつに絞れる
       link(rel="canonical" href=url)
 
-    script(src= rootPath + "/js/ua-switch.js")
+    script(src= rootPath + 'js/ua-switch.js')
 
     // stylesheet
     block StylesheetBlock
-      link(rel="stylesheet", href="css/style.css")
+      link(rel="stylesheet", href= rootPath + 'css/lib/material.min.css')
+      link(rel="stylesheet", href= rootPath + 'css/style.css')
 
   body(class= 'page-' + pageId)
     //- appId指定を忘れないように
@@ -75,9 +76,10 @@ html(lang="ja")
 
     // javascript
     block JavascriptBlock
-      script(src='js/lib/jquery.min.js')
-      script(src='js/lib/lodash.min.js')
-      script(src="js/script.js")
+      script(src= rootPath + 'js/lib/jquery.min.js')
+      script(src= rootPath + 'js/lib/lodash.min.js')
+      script(src= rootPath + 'js/lib/material.min.js')
+      script(src= rootPath + 'js/script.js')
 
     //- include ../_partial/gplus-platform.html
 
