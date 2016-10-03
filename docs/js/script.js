@@ -17,7 +17,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var Main = function () {
   function Main() {
-    var opts = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     _classCallCheck(this, Main);
 
@@ -128,7 +128,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var Common = function () {
   function Common() {
-    var opts = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     _classCallCheck(this, Common);
 
@@ -187,7 +187,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var Index = function () {
   function Index() {
-    var opts = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     _classCallCheck(this, Index);
 
