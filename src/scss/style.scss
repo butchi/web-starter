@@ -4,31 +4,8 @@
 // config
 @import 'function', 'variable', 'mixin', 'keyframes';
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: #{$px-per-rem}px;
-}
-
-body {
-  @include mq-sp {
-    font-size: $base-font-size--sp;
-  }
-  @include mq-pc {
-    font-size: $base-font-size--pc;
-  }
-
-  font-family: $sans-serif;
-  line-height: 1.5;
-}
-
-main {
-  display: block;
-}
-
 // modules
+@import 'module/common';
 @import 'module/wrapper';
 
 // pages

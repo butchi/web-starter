@@ -12,6 +12,10 @@
     @include mq-sp {
       @content;
     }
+  } @elseif $env == "tab" {
+    @include mq-tab {
+      @content;
+    }
   } @else {
     @include mq-all {
       @content;
@@ -35,6 +39,13 @@
 // for Smartphone
 @mixin mq-sp {
   html.is-sp & {
+    @content;
+  }
+}
+
+// for Tablet
+@mixin mq-tab {
+  html.is-tab & {
     @content;
   }
 }

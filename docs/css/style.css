@@ -47,11 +47,14 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-* {
-  box-sizing: border-box; }
+.display-none {
+  display: none; }
 
-html {
-  font-size: 100px; }
+html.is-pc .pc-none {
+  display: none; }
+
+html.is-sp .sp-none {
+  display: none; }
 
 body {
   font-family: YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Meiryo, "メイリオ", sans-serif;
@@ -63,8 +66,38 @@ body {
     font-size: 15px;
     font-size: 0.15rem; }
 
+html {
+  font-size: 100px; }
+  html.is-sp html {
+    font-size: 15px;
+    font-size: 0.15rem; }
+  html.is-pc html {
+    font-size: 15px;
+    font-size: 0.15rem; }
+  html.is-tab html {
+    font-size: 15px;
+    font-size: 0.15rem; }
+
+body {
+  font-family: YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Meiryo, "メイリオ", sans-serif; }
+  html.is-sp body {
+    font-size: 15px;
+    font-size: 0.15rem;
+    line-height: 1.5; }
+  html.is-pc body {
+    font-size: 15px;
+    font-size: 0.15rem;
+    line-height: 1.5; }
+
 main {
   display: block; }
+
+* {
+  box-sizing: border-box; }
+
+a {
+  color: inherit;
+  text-decoration: inherit; }
 
 html.is-sp .wrapper {
   overflow: hidden; }

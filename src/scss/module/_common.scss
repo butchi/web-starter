@@ -14,19 +14,31 @@
   }
 }
 
+body {
+  @include mq-sp {
+    font-size: $base-font-size--sp;
+  }
+  @include mq-pc {
+    font-size: $base-font-size--pc;
+  }
+
+  font-family: $sans-serif;
+  line-height: 1.5;
+}
+
+
 html {
-  font-size: 10px;
+  font-size: #{$px-per-rem}px;
 
-  &.is-sp {
-    font-size: 100vw / $wrapper-width--sp * $px-per-rem;
+  @include mq-sp {
+    font-size: $base-font-size--sp;
+  }
+  @include mq-pc {
+    font-size: $base-font-size--pc;
   }
 
-  &.is-pc {
-    font-size: #{$px-per-rem}px;
-  }
-
-  &.is-tab {
-    font-size: 100vw / $wrapper-width--tab * $px-per-rem;
+  @include mq-tab {
+    font-size: $base-font-size--sp;
   }
 }
 
