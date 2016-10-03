@@ -80,7 +80,7 @@ gulp.task('js', gulp.series(gulp.parallel('browserify', 'copy-bower'), gulp.para
 // html
 gulp.task('pug', () => {
   const locals = readConfig(`${CONFIG}/meta.yml`);
-  return gulp.src(`${SRC}/pug/*.pug`)
+  return gulp.src([`${SRC}/pug/**/*.pug`, `${SRC}/pug/[!_]*.pug`])
     .pipe(pug({
       locals: locals,
       pretty: true,
