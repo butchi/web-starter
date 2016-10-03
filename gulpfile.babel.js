@@ -46,7 +46,7 @@ gulp.task('sass', () => {
 });
 
 // gulp.task('css', gulp.series(gulp.parallel('sass', 'copy-bower-css')));
-gulp.task('css', gulp.series('copy-bower-css'));
+gulp.task('css', gulp.series('sass'));
 
 
 // js
