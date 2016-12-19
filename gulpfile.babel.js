@@ -4,6 +4,7 @@
 import gulp from 'gulp';
 import source from 'vinyl-source-stream';
 import sass from 'gulp-sass';
+import sassGlob from 'gulp-sass-glob';
 import pleeease from 'gulp-pleeease';
 import browserify from 'browserify';
 import babelify from 'babelify';
@@ -15,12 +16,20 @@ import decodecode from 'gulp-decodecode';
 import browserSync from 'browser-sync';
 import readConfig from 'read-config';
 import watch from 'gulp-watch';
+import RevLogger from 'rev-logger';
 
 
 // const
 const SRC = './src';
 const CONFIG = './src/config';
-const DEST = './docs';
+const HTDOCS = './docs';
+const BASE_PATH = '';
+const DEST = `${HTDOCS}${BASE_PATH}`;
+
+const revLogger = new RevLogger({
+    'style.css': `${DEST}/css/style.css`,
+    'script.js': `${DEST}/js/script.js`
+});
 
 
 // css
@@ -39,6 +48,7 @@ gulp.task('copy-bower-css', () => {
 gulp.task('sass', () => {
   const config = readConfig(`${CONFIG}/pleeease.json`);
   return gulp.src(`${SRC}/scss/style.scss`)
+    .pipe(sassGlob())
     .pipe(sass())
     .pipe(pleeease(config))
     .pipe(gulp.dest(`${DEST}/css`))
@@ -100,6 +110,8 @@ gulp.task('js', gulp.series(gulp.parallel('browserify', 'copy-bower-js'), gulp.p
 // html
 gulp.task('pug', () => {
   const locals = readConfig(`${CONFIG}/meta.yml`);
+  locals.versions = revLogger.versions();
+
   return gulp.src([`${SRC}/pug/**/[!_]*.pug`, `!${SRC}/pug/_**/*`])
     .pipe(pug({
       locals: locals,
@@ -115,8 +127,10 @@ gulp.task('html', gulp.series('pug'));
 gulp.task('browser-sync' , () => {
   browserSync({
     server: {
-      baseDir: DEST
+      baseDir: HTDOCS
     },
+    startPath: BASE_PATH,
+    ghostMode: false,
   });
 
   watch([`${SRC}/scss/**/*.scss`], gulp.series('sass', browserSync.reload));
@@ -125,6 +139,10 @@ gulp.task('browser-sync' , () => {
       `${SRC}/pug/**/*.pug`,
       `${SRC}/config/meta.yml`
   ], gulp.series('pug', browserSync.reload));
+
+  revLogger.watch((changed) => {
+      gulp.series('pug', browserSync.reload)();
+  });
 });
 
 gulp.task('serve', gulp.series('browser-sync'));
