@@ -116,6 +116,7 @@ gulp.task('pug', () => {
     .pipe(pug({
       locals: locals,
       pretty: true,
+      basedir: `${SRC}/pug`,
     }))
     .pipe(gulp.dest(`${DEST}`))
   ;
