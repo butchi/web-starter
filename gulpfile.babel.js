@@ -112,7 +112,7 @@ gulp.task('pug', () => {
   const locals = readConfig(`${CONFIG}/meta.yml`);
   locals.versions = revLogger.versions();
 
-  return gulp.src([`${SRC}/pug/**/[!_]*.pug`, `!${SRC}/pug/_**/*`])
+  return gulp.src([`${SRC}/pug/**/[!_]*.pug`, `!${SRC}/pug/**/_*/**/*`])
     .pipe(pug({
       locals: locals,
       pretty: true,
