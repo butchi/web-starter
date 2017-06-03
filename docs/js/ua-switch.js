@@ -23,14 +23,14 @@
   }
 
   var htmlElm = document.querySelector('html');
-  var htmlClassAttr = htmlElm.getAttribute('class') || '';
 
   if(isSp) {
-    htmlElm.setAttribute('class', htmlClassAttr + ' is-sp');
+    htmlElm.classList.add('is-sp');
   } else {
-    htmlElm.setAttribute('class', htmlClassAttr + ' is-pc');
+    htmlElm.classList.add('is-pc');
   }
   if(isTab) {
-    htmlElm.setAttribute('class', htmlClassAttr + ' is-pc is-tab');
+    htmlElm.classList.add('is-pc');
+    htmlElm.classList.add('is-tab');
   }
 })();
