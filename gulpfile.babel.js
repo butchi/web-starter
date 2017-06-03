@@ -8,7 +8,6 @@ import sassGlob from 'gulp-sass-glob';
 import pleeease from 'gulp-pleeease';
 import browserify from 'browserify';
 import babelify from 'babelify';
-import debowerify from 'debowerify';
 import pug from 'gulp-pug';
 import rename from 'gulp-rename';
 import uglify from 'gulp-uglify';
@@ -39,7 +38,7 @@ gulp.task('copy-bower-css', () => {
       'material-design-lite/material.min.css',
       'material-design-lite/material.min.css.map'
     ], {
-    cwd: 'bower_components',
+    cwd: 'node_modules',
   })
     .pipe(gulp.dest(`${DEST}/css/lib`))
   ;
@@ -67,9 +66,9 @@ gulp.task('copy-bower-js', () => {
       // 'material-design-lite/material.min.js.map',
       'jquery/dist/jquery.min.js',
       'jquery/dist/jquery.min.map',
-      'lodash/dist/lodash.min.js'
+      'lodash/lodash.min.js'
     ], {
-    cwd: 'bower_components',
+    cwd: 'node_modules',
   })
     .pipe(gulp.dest(`${DEST}/js/lib`))
   ;
@@ -78,7 +77,6 @@ gulp.task('copy-bower-js', () => {
 gulp.task('browserify', () => {
   return browserify(`${SRC}/js/script.js`)
     .transform(babelify)
-    .transform(debowerify)
     .bundle()
     .pipe(source('script.js'))
     .pipe(gulp.dest(`${DEST}/js`))
