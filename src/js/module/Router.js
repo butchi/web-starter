@@ -1,6 +1,6 @@
 import ns from './ns';
-import PageCommon from '../page/Common';
-import PageIndex from '../page/Index';
+import PageCommon from '../page/common';
+import PageIndex from '../page/index';
 
 export default class Router {
   constructor() {
