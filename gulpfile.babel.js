@@ -27,7 +27,7 @@ const DEST = `${HTDOCS}${BASE_PATH}`;
 
 const revLogger = new RevLogger({
     'style.css': `${DEST}/css/style.css`,
-    'script.js': `${DEST}/js/script.js`
+    'script.js': `${DEST}/js/script.js`,
 });
 
 
@@ -36,7 +36,7 @@ gulp.task('copy-bower-css', () => {
   return gulp.src(
     [
       'material-design-lite/material.min.css',
-      'material-design-lite/material.min.css.map'
+      'material-design-lite/material.min.css.map',
     ], {
     cwd: 'node_modules',
   })
@@ -66,7 +66,7 @@ gulp.task('copy-bower-js', () => {
       // 'material-design-lite/material.min.js.map',
       'jquery/dist/jquery.min.js',
       'jquery/dist/jquery.min.map',
-      'lodash/lodash.min.js'
+      'lodash/lodash.min.js',
     ], {
     cwd: 'node_modules',
   })
@@ -131,7 +131,7 @@ gulp.task('html', gulp.series('pug'));
 gulp.task('browser-sync' , () => {
   browserSync({
     server: {
-      baseDir: HTDOCS
+      baseDir: HTDOCS,
     },
     startPath: BASE_PATH,
     ghostMode: false,
